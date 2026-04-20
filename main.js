@@ -1,5 +1,4 @@
-import { Document, Packer, Paragraph, TextRun } from 'docx';
-import saveAs from 'file-saver';
+// Pure Vanilla JS - No external module imports to prevent Vite Syntax errors
 
 // --- State Management ---
 let tabs = [];
@@ -202,35 +201,14 @@ document.getElementById('fileInput').addEventListener('change', (e) => {
 document.getElementById('btnSaveTxt').addEventListener('click', () => {
   const text = editor.innerText || editor.textContent;
   const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
-  saveAs(blob, "note-pro.txt");
-});
-
-document.getElementById('btnSaveDocx').addEventListener('click', () => {
-  const text = editor.innerText || editor.textContent;
-  const lines = text.split('\n');
-  
-  const docParagraphs = lines.map(line => {
-    return new Paragraph({
-      children: [
-        new TextRun({
-          text: line,
-          font: fontFamilySelect.options[fontFamilySelect.selectedIndex].text,
-          size: parseInt(fontSizeSelect.value) * 2 // half-points in docx
-        })
-      ]
-    });
-  });
-
-  const doc = new Document({
-    sections: [{
-      properties: {},
-      children: docParagraphs,
-    }]
-  });
-
-  Packer.toBlob(doc).then(blob => {
-    saveAs(blob, "note-pro.docx");
-  });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = "note-pro.txt";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
 });
 
 document.getElementById('btnPrint').addEventListener('click', () => {
