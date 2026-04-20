@@ -4,6 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Note Pro</title>
+  <script>
+    window.onerror = function(message, source, lineno, colno, error) {
+      document.body.innerHTML += '<div style="position:fixed;top:0;left:0;right:0;background:red;color:white;z-index:999999;padding:20px;font-size:20px;font-weight:bold;">' + message + '</div>';
+    };
+  </script>
   
   <!-- SEO Best Practices -->
   <meta name="description" content="Note Pro - Advanced rich text editor with real-time updates and multi-tab support." />
