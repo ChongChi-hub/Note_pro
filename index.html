@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
   <title>Note Pro</title>
   <script>
     window.onerror = function(message, source, lineno, colno, error) {
@@ -56,7 +57,7 @@
           <label class="ribbon-btn cursor-pointer" title="Open File (Ctrl+O)">
             <i class="fas fa-folder-open text-amber-400"></i>
             <span>Open</span>
-            <input type="file" id="fileInput" class="hidden" accept=".txt,.html">
+            <input type="file" id="fileInput" class="hidden" accept=".txt,.html,.docx">
           </label>
           
           <button id="btnSaveTxt" class="ribbon-btn" title="Save as TXT (Ctrl+S)">

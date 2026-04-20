@@ -190,11 +190,29 @@ document.getElementById('btnPaste').addEventListener('click', async () => {
 document.getElementById('fileInput').addEventListener('change', (e) => {
   const file = e.target.files[0];
   if (!file) return;
-  const reader = new FileReader();
-  reader.onload = (ev) => {
-    createNewTab(file.name, ev.target.result);
-  };
-  reader.readAsText(file);
+
+  if (file.name.toLowerCase().endsWith('.docx')) {
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      mammoth.convertToHtml({ arrayBuffer: ev.target.result })
+        .then((result) => {
+          createNewTab(file.name, result.value);
+        })
+        .catch((err) => {
+          console.error("Error reading DOCX:", err);
+          alert("Không thể đọc file DOCX này.");
+        });
+    };
+    reader.readAsArrayBuffer(file);
+  } else {
+    // TXT or HTML
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      createNewTab(file.name, ev.target.result);
+    };
+    reader.readAsText(file);
+  }
+  
   e.target.value = ''; // reset
 });
 
