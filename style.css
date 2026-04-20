@@ -1,0 +1,114 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --font-inter: 'Inter', sans-serif;
+  --font-roboto: 'Roboto', sans-serif;
+  --font-opensans: 'Open Sans', sans-serif;
+  --font-lato: 'Lato', sans-serif;
+  --font-montserrat: 'Montserrat', sans-serif;
+  --font-poppins: 'Poppins', sans-serif;
+  --font-playfair: 'Playfair Display', serif;
+  --font-merriweather: 'Merriweather', serif;
+  --font-nunito: 'Nunito', sans-serif;
+  --font-raleway: 'Raleway', sans-serif;
+  --font-ubuntu: 'Ubuntu', sans-serif;
+  --font-oswald: 'Oswald', sans-serif;
+  --font-ptsans: 'PT Sans', sans-serif;
+  --font-robotomono: 'Roboto Mono', monospace;
+  --font-lora: 'Lora', serif;
+  --font-mulish: 'Mulish', sans-serif;
+  --font-quicksand: 'Quicksand', sans-serif;
+  --font-firasans: 'Fira Sans', sans-serif;
+  --font-worksans: 'Work Sans', sans-serif;
+  --font-barlow: 'Barlow', sans-serif;
+  --font-inconsolata: 'Inconsolata', monospace;
+  --font-dosis: 'Dosis', sans-serif;
+  --font-cabin: 'Cabin', sans-serif;
+  --font-dancingscript: 'Dancing Script', cursive;
+  --font-pacifico: 'Pacifico', cursive;
+}
+
+@layer base {
+  body {
+    @apply bg-slate-900 text-slate-100 font-inter antialiased transition-colors duration-500 overflow-hidden;
+  }
+  
+  /* Select formatting */
+  select {
+    @apply appearance-none bg-slate-800 border border-slate-700 text-white py-1.5 px-3 pr-8 rounded-lg outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-300;
+  }
+  
+  button {
+    @apply transition-all duration-300 active:scale-95;
+  }
+}
+
+@layer components {
+  .ribbon-btn {
+    @apply flex flex-col items-center justify-center p-2 rounded-xl hover:bg-slate-700/50 text-slate-300 hover:text-white transition-all duration-300 gap-1;
+  }
+  .ribbon-btn i {
+    @apply text-lg;
+  }
+  .ribbon-btn span {
+    @apply text-xs font-medium;
+  }
+  
+  .editor-area {
+    @apply flex-1 w-full h-full bg-slate-800/80 backdrop-blur-md rounded-2xl shadow-2xl p-8 outline-none overflow-auto prose prose-invert max-w-none transition-all duration-300;
+  }
+  
+  .tab-btn {
+    @apply flex items-center gap-2 px-4 py-2 bg-slate-800/50 hover:bg-slate-700/80 rounded-t-lg border-b-2 border-transparent transition-all duration-300 text-sm font-medium text-slate-400 max-w-[200px] cursor-pointer;
+  }
+  
+  .tab-btn.active {
+    @apply bg-slate-800 text-indigo-400 border-indigo-500 shadow-lg;
+  }
+  
+  .tab-close {
+    @apply ml-auto p-0.5 rounded-full hover:bg-slate-600 text-slate-400 hover:text-red-400 transition-colors duration-200;
+  }
+  
+  /* Scrollbar override */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-slate-800/50 rounded-full;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-slate-600 rounded-full border-2 border-slate-800 hover:bg-slate-500 transition-colors duration-300;
+  }
+}
+
+/* Glassmorphism containers */
+.glass-panel {
+  @apply bg-slate-800/60 backdrop-blur-xl border border-slate-700/50 shadow-2xl;
+}
+
+/* Print styling */
+@media print {
+  body {
+    @apply bg-white text-black;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .editor-area {
+    @apply shadow-none text-black bg-white p-0 m-0 overflow-visible h-auto max-h-none border-none;
+    box-shadow: none !important;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
