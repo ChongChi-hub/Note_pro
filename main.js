@@ -1,5 +1,5 @@
 import { Document, Packer, Paragraph, TextRun } from 'docx';
-import { saveAs } from 'file-saver';
+import saveAs from 'file-saver';
 
 // --- State Management ---
 let tabs = [];
