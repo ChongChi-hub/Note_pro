@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Note Pro</title>
+  
+  <!-- SEO Best Practices -->
+  <meta name="description" content="Note Pro - Advanced rich text editor with real-time updates and multi-tab support." />
+  
+  <!-- Font Awesome -->
+
+  <!-- Google Fonts: Top 25 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;700&family=Cabin:wght@400;500;700&family=Dancing+Script:wght@400;700&family=Dosis:wght@400;500;700&family=Fira+Sans:wght@400;500;700&family=Inconsolata:wght@400;700&family=Inter:wght@400;500;600;700&family=Lato:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&family=Merriweather:wght@400;700&family=Montserrat:wght@400;500;600;700&family=Mulish:wght@400;600;700&family=Nunito:wght@400;600;700&family=Open+Sans:wght@400;500;600;700&family=Oswald:wght@400;500;700&family=PT+Sans:wght@400;700&family=Pacifico&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@400;500;600;700&family=Quicksand:wght@400;500;700&family=Raleway:wght@400;500;600;700&family=Roboto+Mono:wght@400;500;700&family=Roboto:wght@400;500;700&family=Ubuntu:wght@400;500;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <script type="module" crossorigin src="./assets/index-Cf9yM20t.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-DWdKAvHT.css">
+</head>
+<body class="h-screen w-screen flex flex-col hide-scrollbar overflow-hidden">
+  
+  <!-- Full Screen Area -->
+  <div class="flex-1 flex w-full relative z-10 bg-[url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop')] bg-cover bg-center">
+    <!-- Backdrop Blur overlay -->
+    <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm z-0"></div>
+    
+    <div class="flex flex-col w-full max-w-7xl mx-auto h-full z-10 p-4 pt-6 gap-4 fade-in">
+      
+      <!-- Top Ribbon / Toolbar glass-panel -->
+      <header class="glass-panel no-print rounded-2xl flex flex-col md:flex-row items-center p-3 px-6 gap-6 shrink-0 relative overflow-hidden group">
+        <div class="absolute inset-0 bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
+        <!-- Branding -->
+        <div class="flex items-center gap-3 shrink-0">
+          <img src="logo.png" alt="Logo" class="w-10 h-10 object-contain drop-shadow-md bg-white p-1 rounded-lg">
+          <div>
+            <h1 class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-400">Note Pro</h1>
+            <div id="clockDisplay" class="text-[10px] text-slate-400 font-mono tracking-wider">00:00:00</div>
+          </div>
+        </div>
+
+        <div class="h-10 w-px bg-slate-700 mx-2 hidden md:block shrink-0"></div>
+
+        <!-- Main Toolbar Actions -->
+        <div class="flex flex-wrap items-center justify-center gap-1 shrink-0">
+          <button id="btnNew" class="ribbon-btn" title="Create New Note (Ctrl+N)">
+            <i class="fas fa-file-circle-plus text-emerald-400"></i>
+            <span>New</span>
+          </button>
+          
+          <label class="ribbon-btn cursor-pointer" title="Open File (Ctrl+O)">
+            <i class="fas fa-folder-open text-amber-400"></i>
+            <span>Open</span>
+            <input type="file" id="fileInput" class="hidden" accept=".txt,.html">
+          </label>
+          
+          <div class="relative group/save">
+            <button id="btnSaveMenu" class="ribbon-btn">
+              <i class="fas fa-save text-blue-400"></i>
+              <span>Save</span>
+            </button>
+            <div class="absolute top-full left-0 mt-2 w-32 bg-slate-800 border border-slate-700 rounded-xl shadow-xl overflow-hidden opacity-0 invisible group-hover/save:opacity-100 group-hover/save:visible transition-all duration-300 z-50">
+              <button id="btnSaveTxt" class="w-full text-left px-4 py-2 hover:bg-slate-700 text-sm flex items-center gap-2"><i class="fas fa-file-lines text-slate-400"></i> as .TXT</button>
+              <button id="btnSaveDocx" class="w-full text-left px-4 py-2 hover:bg-slate-700 text-sm flex items-center gap-2"><i class="fas fa-file-word text-blue-400"></i> as .DOCX</button>
+            </div>
+          </div>
+          
+          <button id="btnPrint" class="ribbon-btn" title="Print Document (Ctrl+P)">
+            <i class="fas fa-print text-purple-400"></i>
+            <span>Print</span>
+          </button>
+        </div>
+
+        <div class="h-10 w-px bg-slate-700 mx-2 hidden md:block shrink-0"></div>
+        
+        <!-- Text Formatting Actions -->
+        <div class="flex flex-wrap items-center justify-center gap-1 shrink-0">
+          <button id="btnCut" class="ribbon-btn" title="Cut">
+            <i class="fas fa-cut text-slate-300"></i>
+            <span>Cut</span>
+          </button>
+          <button id="btnCopy" class="ribbon-btn" title="Copy">
+            <i class="fas fa-copy text-slate-300"></i>
+            <span>Copy</span>
+          </button>
+          <button id="btnPaste" class="ribbon-btn" title="Paste">
+            <i class="fas fa-paste text-slate-300"></i>
+            <span>Paste</span>
+          </button>
+        </div>
+
+        <div class="h-10 w-px bg-slate-700 mx-2 hidden md:block shrink-0"></div>
+        
+        <!-- Typography Options -->
+        <div class="flex items-center gap-3 w-full md:w-auto mt-2 md:mt-0 ml-auto">
+          <div class="relative">
+            <select id="fontFamilySelect" class="w-40 font-medium">
+              <option value="'Times New Roman', Times, serif">Times New Roman</option>
+              <option value="'Inter', sans-serif">Inter</option>
+              <option value="'Roboto', sans-serif">Roboto</option>
+              <option value="'Open Sans', sans-serif">Open Sans</option>
+              <option value="'Lato', sans-serif">Lato</option>
+              <option value="'Montserrat', sans-serif">Montserrat</option>
+              <option value="'Poppins', sans-serif">Poppins</option>
+              <option value="'Playfair Display', serif">Playfair Display</option>
+              <option value="'Merriweather', serif">Merriweather</option>
+              <option value="'Nunito', sans-serif">Nunito</option>
+              <option value="'Raleway', sans-serif">Raleway</option>
+              <option value="'Ubuntu', sans-serif">Ubuntu</option>
+              <option value="'Oswald', sans-serif">Oswald</option>
+              <option value="'PT Sans', sans-serif">PT Sans</option>
+              <option value="'Roboto Mono', monospace">Roboto Mono</option>
+              <option value="'Lora', serif">Lora</option>
+              <option value="'Mulish', sans-serif">Mulish</option>
+              <option value="'Quicksand', sans-serif">Quicksand</option>
+              <option value="'Fira Sans', sans-serif">Fira Sans</option>
+              <option value="'Work Sans', sans-serif">Work Sans</option>
+              <option value="'Barlow', sans-serif">Barlow</option>
+              <option value="'Inconsolata', monospace">Inconsolata</option>
+              <option value="'Dosis', sans-serif">Dosis</option>
+              <option value="'Cabin', sans-serif">Cabin</option>
+              <option value="'Dancing Script', cursive">Dancing Script</option>
+              <option value="'Pacifico', cursive">Pacifico</option>
+            </select>
+            <div class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
+              <i class="fas fa-chevron-down text-xs"></i>
+            </div>
+          </div>
+          
+          <div class="relative">
+            <select id="fontSizeSelect" class="w-24 font-medium">
+              <option value="12px">12px</option>
+              <option value="14px">14px</option>
+              <option value="16px" selected>16px</option>
+              <option value="18px">18px</option>
+              <option value="20px">20px</option>
+              <option value="24px">24px</option>
+              <option value="28px">28px</option>
+              <option value="32px">32px</option>
+              <option value="36px">36px</option>
+              <option value="48px">48px</option>
+              <option value="64px">64px</option>
+            </select>
+            <div class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
+              <i class="fas fa-chevron-down text-xs"></i>
+            </div>
+          </div>
+        </div>
+
+      </header>
+
+      <!-- Main Workspace -->
+      <main class="flex-1 flex flex-col overflow-hidden min-h-0 bg-slate-800/40 rounded-2xl border border-slate-700/50 shadow-lg backdrop-blur-md">
+        
+        <!-- Tab Bar -->
+        <div class="flex items-center shrink-0 border-b border-slate-700/50 bg-slate-900/40 pt-2 px-2 no-print overflow-x-auto hide-scrollbar" id="tabBar">
+          <!-- Tabs injected by JS -->
+          <button id="btnNewTab" class="ml-2 hover:bg-slate-700 w-8 h-8 rounded text-slate-400 hover:text-white transition-colors flex items-center justify-center" title="New Tab">
+            <i class="fas fa-plus"></i>
+          </button>
+        </div>
+        
+        <!-- Editor Wrapper -->
+        <div class="flex-1 p-6 overflow-hidden flex justify-center pb-6">
+          <div id="editor" contenteditable="true" spellcheck="false" class="editor-area focus:ring-0">
+            <!-- Content editable -->
+          </div>
+        </div>
+
+      </main>
+
+    </div>
+  </div>
+
+</body>
+</html>
