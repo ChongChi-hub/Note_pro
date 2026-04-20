@@ -199,12 +199,17 @@ document.getElementById('fileInput').addEventListener('change', (e) => {
 });
 
 document.getElementById('btnSaveTxt').addEventListener('click', () => {
+  let filename = prompt("Vui lòng nhập tên file muốn lưu:", "note-pro");
+  if (filename === null) return; // User cancelled
+  if (filename.trim() === "") filename = "note-pro";
+  if (!filename.endsWith(".txt")) filename += ".txt";
+  
   const text = editor.innerText || editor.textContent;
   const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = "note-pro.txt";
+  a.download = filename;
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
